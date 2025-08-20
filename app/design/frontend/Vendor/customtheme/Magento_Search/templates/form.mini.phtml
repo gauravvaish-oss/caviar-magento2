@@ -1,0 +1,57 @@
+<?php
+/** @var $block \Magento\Framework\View\Element\Template */
+/** @var $escaper \Magento\Framework\Escaper */
+/** @var $configProvider \Magento\Search\ViewModel\ConfigProvider */
+/** @var $additionalSearchFormData \Magento\Search\ViewModel\AdditionalSearchFormData */
+
+$configProvider = $block->getData('configProvider');
+$additionalSearchFormData = $block->getData('additionalSearchFormData');
+$helper = $configProvider->getSearchHelperData();
+$allowedSuggestion = $configProvider->isSuggestionsAllowed();
+$quickSearchUrl = $allowedSuggestion ? $escaper->escapeUrl($helper->getSuggestUrl()) : '';
+?>
+
+<form class="form minisearch custom-search search-input" id="search_mini_form" 
+      action="<?= $escaper->escapeUrl($helper->getResultUrl()) ?>" method="get"
+      role="search">
+
+    <?php if (!empty($queryParams = $additionalSearchFormData->getFormData())): ?>
+        <?php foreach ($queryParams as $param): ?>
+            <input type="hidden" 
+                   name="<?= $escaper->escapeHtmlAttr($param['name']) ?>"
+                   value="<?= $escaper->escapeHtmlAttr($param['value']) ?>" />
+        <?php endforeach; ?>
+    <?php endif; ?>
+
+    <div class="search-input">
+        <input id="search"
+               data-mage-init='{
+                    "quickSearch": {
+                        "formSelector": "#search_mini_form",
+                        "url": "<?= /* @noEscape */ $quickSearchUrl ?>",
+                        "destinationSelector": "#search_autocomplete",
+                        "minSearchLength": "<?= $escaper->escapeHtml($helper->getMinQueryLength()) ?>"
+                    }
+                }'
+               type="text"
+               name="<?= $escaper->escapeHtmlAttr($helper->getQueryParamName()) ?>"
+               value="<?= /* @noEscape */ $helper->getEscapedQueryText() ?>"
+               placeholder="<?= $escaper->escapeHtmlAttr(__('Search')) ?>"
+               class="input-text"
+               maxlength="<?= $escaper->escapeHtmlAttr($helper->getMaxQueryLength()) ?>"
+               role="combobox"
+               aria-haspopup="false"
+               aria-autocomplete="both"
+               autocomplete="off"
+               aria-expanded="false" />
+
+        <div id="search_autocomplete" class="search-autocomplete"></div>
+        <?php // $block->getChildHtml() ?>
+    </div>
+
+    <div class="search-btn">
+        <button type="submit" aria-label="<?= $escaper->escapeHtml(__('Search')) ?>">
+            <i class="lni lni-search-alt"></i>
+        </button>
+    </div>
+</form>

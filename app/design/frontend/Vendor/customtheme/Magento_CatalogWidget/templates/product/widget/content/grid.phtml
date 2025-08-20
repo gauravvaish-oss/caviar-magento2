@@ -1,0 +1,81 @@
+<?php
+/** @var \Magento\CatalogWidget\Block\Product\ProductsList $block */
+use Magento\Framework\App\Action\Action;
+
+if ($exist = ($block->getProductCollection() && $block->getProductCollection()->getSize())):
+    $items = $block->getProductCollection()->getItems();
+    $image = 'new_products_content_widget_grid';
+    $templateType = \Magento\Catalog\Block\Product\ReviewRendererInterface::SHORT_VIEW;
+    $showCart = true;
+?>
+<section class="trending-product section" style="margin-top: 12px;">
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <div class="section-title">
+                    <h2><?= $block->escapeHtml(__($block->getTitle() ?: 'Trending Product')) ?></h2>
+                    <p>There are many variations of passages of Lorem Ipsum available, but the majority have
+                        suffered alteration in some form.</p>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <?php foreach ($items as $_item): ?>
+                <div class="col-lg-3 col-md-6 col-12">
+                    <!-- Start Single Product -->
+                    <div class="single-product">
+                        <div class="product-image">
+                            <a href="<?= $block->escapeUrl($block->getProductUrl($_item)) ?>">
+                                <?= $block->getImage($_item, $image)->toHtml() ?>
+                            </a>
+                            <div class="button">
+                                <?php if ($_item->isSaleable()): ?>
+                                    <?php $postParams = $block->getAddToCartPostParams($_item); ?>
+                                    <form data-role="tocart-form"
+                                          data-product-sku="<?= $block->escapeHtml($_item->getSku()) ?>"
+                                          action="<?= $block->escapeUrl($postParams['action']) ?>" method="post">
+                                        <input type="hidden" name="product"
+                                               value="<?= $block->escapeHtmlAttr($postParams['data']['product']) ?>">
+                                        <input type="hidden"
+                                               name="<?= Action::PARAM_NAME_URL_ENCODED ?>"
+                                               value="<?= $postParams['data'][Action::PARAM_NAME_URL_ENCODED] ?>">
+                                        <?= $block->getBlockHtml('formkey') ?>
+                                        <button type="submit" class="btn">
+                                            <i class="lni lni-cart"></i> <?= $block->escapeHtml(__('Add to Cart')) ?>
+                                        </button>
+                                    </form>
+                                <?php else: ?>
+                                    <span class="out-of-stock"><?= $block->escapeHtml(__('Out of stock')) ?></span>
+                                <?php endif; ?>
+                            </div>
+                        </div>
+                        <div class="product-info">
+                            <span class="category"><?= $block->escapeHtml($_item->getAttributeText('category_ids') ?: '') ?></span>
+                            <h4 class="title">
+                                <a href="<?= $block->escapeUrl($block->getProductUrl($_item)) ?>">
+                                    <?= $block->escapeHtml($_item->getName()) ?>
+                                </a>
+                            </h4>
+                            <?= $block->getReviewsSummaryHtml($_item, $templateType) ?>
+                            <div class="price">
+                                <?= $block->getProductPriceHtml($_item) ?>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- End Single Product -->
+                </div>
+            <?php endforeach; ?>
+        </div>
+    </div>
+</section>
+
+<?php if($block->getBlockHtml('formkey')): ?>
+<script type="text/x-magento-init">
+{
+    ".trending-product [data-role=tocart-form]": {
+        "Magento_Catalog/js/validate-product": {}
+    }
+}
+</script>
+<?php endif; ?>
+<?php endif; ?>

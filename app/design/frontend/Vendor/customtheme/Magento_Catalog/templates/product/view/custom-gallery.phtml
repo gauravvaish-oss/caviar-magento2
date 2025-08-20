@@ -1,0 +1,38 @@
+<?php
+/** @var \Magento\Catalog\Block\Product\View $block */
+$product = $block->getProduct();
+$imageHelper = $block->getImage($product, 'product_page_image_large');
+$galleryImages = $product->getMediaGalleryImages();
+?>
+
+<div class="col-lg-6 col-md-12 col-12">
+            <div class="product-images">
+                <main id="gallery">
+                    <div class="main-img">
+                        <img src="<?= $imageHelper->getImageUrl(); ?>"
+                            id="current"
+                            alt="<?= $block->escapeHtmlAttr($product->getName()); ?>">
+                    </div>
+                    <div class="images">
+                        <?php if ($galleryImages): ?>
+                            <?php foreach ($galleryImages as $image): ?>
+                                <img src="<?= $image->getUrl(); ?>"
+                                    class="img"
+                                    alt="<?= $block->escapeHtmlAttr($product->getName()); ?>">
+                            <?php endforeach; ?>
+                        <?php endif; ?>
+                    </div>
+                </main>
+            </div>
+        </div>
+
+        <script>
+require(['jquery'], function($) {
+    $(document).ready(function() {
+        $('.product-images .images img').on('click', function() {
+            var newSrc = $(this).attr('src');
+            $('#current').attr('src', newSrc);
+        });
+    });
+});
+</script>

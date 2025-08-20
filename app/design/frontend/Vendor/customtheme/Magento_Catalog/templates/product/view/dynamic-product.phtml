@@ -1,0 +1,74 @@
+<?php
+/** @var \Magento\Catalog\Block\Product\View $block */
+$product = $block->getProduct();
+$imageHelper = $block->getImage($product, 'product_page_image_large');
+$galleryImages = $product->getMediaGalleryImages();
+?>
+
+<div class="top-area">
+    <div class="row align-items-center">
+
+        <!-- Product Info -->
+        <div class="col-lg-6 col-md-12 col-12">
+            <div class="product-info">
+                <h2 class="title"><?= $block->escapeHtml($product->getName()); ?></h2>
+
+                <!-- Price -->
+                <h3 class="price">
+                    <?= $block->getProductPrice($product) ?>
+                </h3>
+
+                <!-- Short Description -->
+                <?php if ($product->getShortDescription()): ?>
+                    <p class="info-text">
+                        <?= $block->escapeHtml($product->getShortDescription()); ?>
+                    </p>
+                <?php endif; ?>
+
+                <!-- Dynamic Attributes -->
+                <div class="row">
+                    <?php
+                    $attributes = $product->getAttributes();
+                    foreach ($attributes as $attribute) {
+                        if (!$attribute->getIsVisibleOnFront()) {
+                            continue; // only show visible attributes
+                        }
+
+                        $value = $attribute->getFrontend()->getValue($product);
+
+                        if (!$value || strtolower($value) === 'no') {
+                            continue; // skip empty values
+                        }
+                        ?>
+                        <div class="col-lg-4 col-md-4 col-12">
+                            <div class="form-group">
+                                <label><?= $block->escapeHtml($attribute->getFrontendLabel()); ?></label>
+                                <div><?= $block->escapeHtml($value); ?></div>
+                            </div>
+                        </div>
+                    <?php } ?>
+
+                    <!-- Quantity -->
+                    <div class="col-lg-4 col-md-4 col-12">
+                        <?= $block->getChildHtml('product.info.quantity') ?>
+                    </div>
+                </div>
+
+                <!-- Buttons -->
+                <div class="bottom-content">
+                    <div class="row align-items-end">
+                        <div class="col-lg-4 col-md-4 col-12">
+                            <?= $block->getChildHtml('product.info.addtocart') ?>
+                        </div>
+                        <div class="col-lg-4 col-md-4 col-12">
+                            <?= $block->getChildHtml('product.info.addto.compare') ?>
+                        </div>
+                        <div class="col-lg-4 col-md-4 col-12">
+                            <?= $block->getChildHtml('product.info.addto.wishlist') ?>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

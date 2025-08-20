@@ -1,0 +1,33 @@
+<?php
+$categories = $block->getTopCategories(); ?>
+
+<div class="mega-category-menu">
+    <span class="cat-button">
+        <i class="lni lni-menu"></i>All Categories
+    </span>
+    <ul class="sub-category">
+        <?php foreach ($categories as $category): ?>
+            <li>
+                <a href="<?= $category->getUrl() ?>">
+                    <?= $block->escapeHtml($category->getName()) ?>
+                    <?php if (count($block->getSubCategories($category->getId()))): ?>
+                        <i class="lni lni-chevron-right"></i>
+                    <?php endif; ?>
+                </a>
+
+                <?php $subCategories = $block->getSubCategories($category->getId()); ?>
+                <?php if (count($subCategories)): ?>
+                    <ul class="inner-sub-category">
+                        <?php foreach ($subCategories as $subCategory): ?>
+                            <li>
+                                <a href="<?= $subCategory->getUrl() ?>">
+                                    <?= $block->escapeHtml($subCategory->getName()) ?>
+                                </a>
+                            </li>
+                        <?php endforeach; ?>
+                    </ul>
+                <?php endif; ?>
+            </li>
+        <?php endforeach; ?>
+    </ul>
+</div>

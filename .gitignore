@@ -1,0 +1,72 @@
+# Magento 2 Gitignore
+
+############################
+# Composer & PHP
+############################
+composer.lock
+auth.json
+.php_cs.cache
+.php_cs.dist
+/vendor/
+/node_modules/
+
+############################
+# Magento generated & var
+############################
+/generated/
+/var/
+/pub/static/_cache/
+/pub/static/adminhtml/*/
+/pub/static/frontend/*/
+/pub/static/deployed_version.txt
+/pub/static/frontend/*/*/*/css/
+/pub/static/frontend/*/*/*/js/
+/pub/static/frontend/*/*/*/css_secure/
+/pub/static/frontend/*/*/*/js_secure/
+
+# But keep .htaccess files
+!pub/static/.htaccess
+!var/.htaccess
+!generated/.htaccess
+
+############################
+# IDE / Editors
+############################
+.idea/
+*.iml
+*.swp
+*.swo
+*.swn
+*.swm
+*.log
+.DS_Store
+Thumbs.db
+
+############################
+# OS generated
+############################
+ehthumbs.db
+Icon?
+Desktop.ini
+
+############################
+# Magento specific local files
+############################
+#/app/etc/env.php
+#/app/etc/config.php
+
+############################
+# Backup files
+############################
+*.bak
+*.tmp
+*.temp
+*.orig
+*.old
+
+############################
+# Docker / Vagrant
+############################
+/.docker/
+/.vagrant/
+.env
