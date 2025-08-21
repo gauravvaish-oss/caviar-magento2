@@ -17,6 +17,7 @@ body {
   color: #888;
   overflow-x: hidden;
   font-size: 14px;
+  background: #f9f9f9;
 }
 
 p {
@@ -894,33 +895,32 @@ ol {
 }
 
 /* Bread Crumbs */
-.breadcrumbs {
+.custom-breadcrumbs {
   position: relative;
   padding: 15px 0;
   text-align: left;
   background-color: #fff;
-  -webkit-box-shadow: 0px 7px 30px rgba(0, 0, 0, 0.075);
-  box-shadow: 0px 7px 30px rgba(0, 0, 0, 0.075);
+  border: 1px solid #eee;
 }
 
 @media only screen and (min-width: 768px) and (max-width: 991px) {
-  .breadcrumbs {
+  .custom-breadcrumbs {
     padding: 30px;
   }
 }
 
 @media (max-width: 767px) {
-  .breadcrumbs {
+  .custom-breadcrumbs {
     padding: 30px;
   }
 }
 
-.breadcrumbs .breadcrumbs-content {
+.custom-breadcrumbs .breadcrumbs-content {
   position: relative;
   text-align: left;
 }
 
-.breadcrumbs .breadcrumbs-content .page-title {
+.custom-breadcrumbs .breadcrumbs-content .page-title {
   font-size: 18px;
   color: #081828;
   font-weight: 600;
@@ -930,21 +930,21 @@ ol {
 }
 
 @media only screen and (min-width: 768px) and (max-width: 991px) {
-  .breadcrumbs .breadcrumbs-content .page-title {
+  .custom-breadcrumbs .breadcrumbs-content .page-title {
     font-size: 17px;
     line-height: 28px;
   }
 }
 
 @media (max-width: 767px) {
-  .breadcrumbs .breadcrumbs-content .page-title {
+  .custom-breadcrumbs .breadcrumbs-content .page-title {
     font-size: 16px;
     text-align: center;
     line-height: 26px;
   }
 }
 
-.breadcrumbs .breadcrumbs-content .breadcrumb-nav {
+.custom-breadcrumbs .breadcrumbs-content .breadcrumb-nav {
   background: transparent;
   border-radius: 0;
   margin-bottom: 0;
@@ -952,18 +952,18 @@ ol {
   display: inline-block;
 }
 
-.breadcrumbs .breadcrumb-nav {
+.custom-breadcrumbs .breadcrumb-nav {
   text-align: right;
 }
 
 @media (max-width: 767px) {
-  .breadcrumbs .breadcrumb-nav {
+  .custom-breadcrumbs .breadcrumb-nav {
     text-align: center;
     margin-top: 15px;
   }
 }
 
-.breadcrumbs .breadcrumb-nav li {
+.custom-breadcrumbs .breadcrumb-nav li {
   display: inline-block;
   position: relative;
   padding-right: 14px;
@@ -971,7 +971,7 @@ ol {
   text-transform: capitalize;
 }
 
-.breadcrumbs .breadcrumb-nav li:after {
+.custom-breadcrumbs .breadcrumb-nav li:after {
   content: "\ea62";
 font-family: lineIcons;
 font-size: 12px;
@@ -980,24 +980,24 @@ top: 3px;
 right: -7px;
 }
 
-.breadcrumbs .breadcrumb-nav li:last-child {
+.custom-breadcrumbs .breadcrumb-nav li:last-child {
   margin: 0;
   padding: 0;
 }
 
-.breadcrumbs .breadcrumb-nav li:last-child::after {
+.custom-breadcrumbs .breadcrumb-nav li:last-child::after {
   display: none;
 }
 
-.breadcrumbs .breadcrumb-nav li,
-.breadcrumbs .breadcrumb-nav li a {
+.custom-breadcrumbs .breadcrumb-nav li,
+.custom-breadcrumbs .breadcrumb-nav li a {
   color: #888;
   font-size: 14px;
   font-weight: 500;
 }
 
-.breadcrumbs .breadcrumb-nav li i,
-.breadcrumbs .breadcrumb-nav li a i {
+.custom-breadcrumbs .breadcrumb-nav li i,
+.custom-breadcrumbs .breadcrumb-nav li a i {
   font-size: 13px;
 display: inline-block;
 margin-right: 3px;
@@ -1005,11 +1005,11 @@ position: relative;
 top: -1px;
 }
 
-.breadcrumbs .breadcrumb-nav li a {
+.custom-breadcrumbs .breadcrumb-nav li a {
   position: relative;
 }
 
-.breadcrumbs .breadcrumb-nav li a:hover {
+.custom-breadcrumbs .breadcrumb-nav li a:hover {
   color: #0167F3;
 }
 
@@ -3620,9 +3620,6 @@ top: 2px;
   animation: fadeIn 0.5s ease-in 1 forwards;
 }
 
-.item-details .product-info {
-  padding-left: 30px;
-}
 
 @media only screen and (min-width: 768px) and (max-width: 991px),
 (max-width: 767px) {
@@ -4891,3 +4888,4 @@ top: 2px;
     display: none;
   }
 }
+

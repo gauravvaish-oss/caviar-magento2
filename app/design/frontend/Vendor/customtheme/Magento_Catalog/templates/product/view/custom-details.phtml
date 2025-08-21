@@ -1,0 +1,75 @@
+<?php
+/** @var \Magento\Catalog\Block\Product\View $block */
+$product = $block->getProduct();
+
+// Description
+$description = $product->getDescription();
+
+// Example: Custom attribute for Features (create attribute 'features' in admin, textarea or text)
+$features = $product->getData('features');
+
+// Product attributes (like Weight, Manufacturer, etc.)
+$attributes = $product->getAttributes();
+
+// Example: Shipping options (you can replace with attribute or CMS block)
+$shipping = $product->getData('shipping_options');
+?>
+<div class="product-details-info">
+    <div class="single-block">
+        <div class="row">
+            <!-- LEFT SIDE -->
+            <div class="col-lg-6 col-12">
+                <div class="info-body custom-responsive-margin">
+                    <?php if ($description): ?>
+                        <h4><?= __('Details') ?></h4>
+                        <div class="product-description">
+                            <?= /* @noEscape */ $description ?>
+                        </div>
+                    <?php endif; ?>
+
+                    <?php if ($features): ?>
+                        <h4><?= __('Features') ?></h4>
+                        <ul class="features">
+                            <?php foreach (explode("\n", $features) as $feature): ?>
+                                <?php if (trim($feature)): ?>
+                                    <li><?= $block->escapeHtml($feature) ?></li>
+                                <?php endif; ?>
+                            <?php endforeach; ?>
+                        </ul>
+                    <?php endif; ?>
+                </div>
+            </div>
+
+            <!-- RIGHT SIDE -->
+            <div class="col-lg-6 col-12">
+                <div class="info-body">
+                    <h4><?= __('Specifications') ?></h4>
+                    <ul class="normal-list">
+                        <?php foreach ($attributes as $attribute): ?>
+                            <?php
+                            if ($attribute->getIsVisibleOnFront() && $product->getData($attribute->getAttributeCode())):
+                                $value = $attribute->getFrontend()->getValue($product);
+                            ?>
+                                <li>
+                                    <span><?= $block->escapeHtml($attribute->getStoreLabel()) ?>:</span>
+                                    <?= $block->escapeHtml($value) ?>
+                                </li>
+                            <?php endif; ?>
+                        <?php endforeach; ?>
+                    </ul>
+
+                    <?php if ($shipping): ?>
+                        <h4><?= __('Shipping Options') ?></h4>
+                        <ul class="normal-list">
+                            <?php foreach (explode("\n", $shipping) as $option): ?>
+                                <?php if (trim($option)): ?>
+                                    <li><?= $block->escapeHtml($option) ?></li>
+                                <?php endif; ?>
+                            <?php endforeach; ?>
+                        </ul>
+                    <?php endif; ?>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

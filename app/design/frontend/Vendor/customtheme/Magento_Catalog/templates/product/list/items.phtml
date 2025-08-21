@@ -1,0 +1,144 @@
+<?php
+/**
+ * Custom Related / Upsell / Cross-sell / New Products Template
+ * Override of: Magento_Catalog/templates/product/list/items.phtml
+ */
+
+use Magento\Catalog\ViewModel\Product\Listing\PreparePostData;
+use Magento\Framework\App\ActionInterface;
+
+/* @var $block \Magento\Catalog\Block\Product\AbstractProduct */
+/** @var \Magento\Framework\View\Helper\SecureHtmlRenderer $secureRenderer */
+?>
+
+<?php
+switch ($type = $block->getType()) {
+    case 'related':
+        if ($exist = $block->getItems()->getSize()) {
+            $items = $block->getItems();
+            $title = __('Related Products');
+        }
+        break;
+
+    case 'upsell':
+        if ($exist = count($block->getItemCollection()->getItems())) {
+            $items = $block->getItemCollection()->getItems();
+            $title = __('We found other products you might like!');
+        }
+        break;
+
+    case 'crosssell':
+        if ($exist = count($block->getItems())) {
+            $items = $block->getItems();
+            $title = __('More Choices:');
+        }
+        break;
+
+    case 'new':
+        if ($exist = $block->getProductCollection()) {
+            $items = $block->getProductCollection();
+            $title = __('New Products');
+        }
+        break;
+
+    default:
+        $exist = null;
+}
+?>
+
+<?php if ($exist): ?>
+<div class="product-details-info">
+    <div class="single-block">
+<div class="container">
+    <h3 class="block-title"><?= $block->escapeHtml($title) ?></h3>
+
+    <div class="row">
+        <?php foreach ($items as $_item): ?>
+            <?php
+            $productUrl = $block->escapeUrl($block->getProductUrl($_item));
+            $image = $block->getImage($_item, 'category_page_grid')->toHtml();
+            $price = $block->getProductPrice($_item);
+            $reviewHtml = $block->getReviewsSummaryHtml(
+                $_item,
+                \Magento\Catalog\Block\Product\ReviewRendererInterface::SHORT_VIEW
+            );
+            ?>
+        <div class="col-lg-3 col-md-6 col-12">
+                <!-- Start Single Product -->
+            <div class="single-product">
+                <!-- Product Image -->
+                <div class="product-image">
+                    <a href="<?= $productUrl ?>">
+                        <?= $image ?>
+                    </a>
+                    <div class="button">
+                        <?php if ($_item->isSaleable()): ?>
+                            <?php
+                            /** @var $viewModel PreparePostData */
+                            $viewModel = $block->getViewModel();
+                            $postArray = $viewModel->getPostData(
+                                $block->escapeUrl($block->getAddToCartUrl($_item)),
+                                ['product' => $_item->getEntityId()]
+                            );
+                            $value = $postArray['data'][ActionInterface::PARAM_NAME_URL_ENCODED];
+                            ?>
+                            <form data-role="tocart-form"
+                                  data-product-sku="<?= $block->escapeHtmlAttr($_item->getSku()) ?>"
+                                  action="<?= $block->escapeUrl($block->getAddToCartUrl($_item)) ?>"
+                                  method="post">
+                                <input type="hidden" name="product"
+                                       value="<?= (int)$_item->getEntityId() ?>">
+                                <input type="hidden"
+                                       name="<?= /* @noEscape */ ActionInterface::PARAM_NAME_URL_ENCODED ?>"
+                                       value="<?= /* @noEscape */ $value ?>">
+                                <?= $block->getBlockHtml('formkey') ?>
+                                <button type="submit" class="btn">
+                                    <i class="lni lni-cart"></i> <?= $block->escapeHtml(__('Add to Cart')) ?>
+                                </button>
+                            </form>
+                        <?php else: ?>
+                            <div class="stock unavailable">
+                                <span><?= $block->escapeHtml(__('Out of stock')) ?></span>
+                            </div>
+                        <?php endif; ?>
+                    </div>
+                </div>
+
+                <!-- Product Info -->
+                <div class="product-info">
+                    <?php
+                    // Load first category name
+                    $categoryName = '';
+                    $categoryIds = $_item->getCategoryIds();
+                    if (!empty($categoryIds)) {
+                        try {
+                            $objectManager = \Magento\Framework\App\ObjectManager::getInstance();
+                            $category = $objectManager->create(\Magento\Catalog\Model\Category::class)->load($categoryIds[0]);
+                            $categoryName = $category->getName();
+                        } catch (\Exception $e) {}
+                    }
+                    ?>
+                    <span class="category"><?= $block->escapeHtml($categoryName) ?></span>
+
+                    <h4 class="title">
+                        <a href="<?= $productUrl ?>">
+                            <?= $block->escapeHtml($_item->getName()) ?>
+                        </a>
+                    </h4>
+
+                    <ul class="review">
+                        <?= $reviewHtml ?>
+                    </ul>
+
+                    <div class="price">
+                        <?= $price ?>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <?php endforeach; ?>
+    </div>
+</div>
+</div>
+</div>
+<?php endif; ?>

@@ -1,0 +1,71 @@
+<?php /** @var $block \Magento\Catalog\Block\Product\View */ ?>
+<?php $product = $block->getProduct(); ?>
+
+<div class="product-info">
+    <!-- Product Name -->
+    <h2 class="title"><?= $block->escapeHtml($product->getName()); ?></h2>
+
+    <!-- Category Example (static demo, replace with real category if needed) -->
+    <p class="category">
+        <i class="lni lni-tag"></i>
+        <?= $block->escapeHtml($product->getTypeId()); ?> :
+        <?php if ($product->getCategoryIds()) : ?>
+            <?php $category = $block->getProduct()->getCategoryCollection()->addAttributeToSelect('name')->getFirstItem(); ?>
+            <a href="<?= $block->getUrl('catalog/category/view', ['id' => $category->getId()]); ?>">
+                <?= $block->escapeHtml($category->getName()); ?>
+            </a>
+        <?php endif; ?>
+    </p>
+
+    <!-- Price -->
+    <h3 class="price">
+        <?= $block->getPriceHtml($product); ?>
+    </h3>
+
+    <!-- Short Description -->
+    <p class="info-text"><?= $block->escapeHtml($product->getShortDescription()); ?></p>
+
+    <!-- Custom Options (Color, Battery, Quantity) -->
+    <div class="row">
+        <div class="col-lg-4 col-md-4 col-12">
+            <?= $block->getChildHtml('product.info.options'); ?>
+        </div>
+        <div class="col-lg-4 col-md-4 col-12">
+            <div class="form-group">
+                <label for="battery">Battery capacity</label>
+                <select class="form-control" id="battery">
+                    <option>5100 mAh</option>
+                    <option>6200 mAh</option>
+                    <option>8000 mAh</option>
+                </select>
+            </div>
+        </div>
+        <div class="col-lg-4 col-md-4 col-12">
+            <div class="form-group quantity">
+                <label for="qty">Quantity</label>
+                <input type="number" id="qty" name="qty" class="form-control" value="1" min="1"/>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bottom Actions -->
+    <div class="bottom-content">
+        <div class="row align-items-end">
+            <div class="col-lg-4 col-md-4 col-12">
+                <div class="button cart-button">
+                    <?= $block->getChildHtml('addtocart'); ?>
+                </div>
+            </div>
+            <div class="col-lg-4 col-md-4 col-12">
+                <div class="wish-button">
+                    <?php // $block->getChildHtml('view.addto.compare'); ?>
+                </div>
+            </div>
+            <div class="col-lg-4 col-md-4 col-12">
+                <div class="wish-button">
+                    <?= $block->getChildHtml('view.addto.wishlist'); ?>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

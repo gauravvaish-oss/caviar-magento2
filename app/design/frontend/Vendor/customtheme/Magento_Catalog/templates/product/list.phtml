@@ -1,9 +1,11 @@
 <?php
 /**
- * Custom Product List Template (Grid & List) — Bootstrap Style
+ * Custom Product List Template (Grid + List View)
  *
- * Preserves all Magento core functionality.
+ * @var $block \Magento\Catalog\Block\Product\ListProduct
+ * @var \Magento\Framework\Escaper $escaper
  */
+
 $_productCollection = $block->getLoadedProductCollection();
 /** @var \Magento\Catalog\Helper\Output $_helper */
 $_helper = $block->getData('outputHelper');
@@ -14,45 +16,17 @@ $_helper = $block->getData('outputHelper');
         <div><?= $escaper->escapeHtml(__('We can\'t find products matching the selection.')) ?></div>
     </div>
 <?php else: ?>
-
-    <!-- Toolbar (top) -->
     <?= $block->getToolbarHtml() ?>
     <?= $block->getAdditionalHtml() ?>
 
-    <?php
-    if ($block->getMode() === 'grid') {
-        $viewMode = 'grid';
-        $imageDisplayArea = 'category_page_grid';
-        $showDescription = false;
-        $templateType = \Magento\Catalog\Block\Product\ReviewRendererInterface::SHORT_VIEW;
-    } else {
-        $viewMode = 'list';
-        $imageDisplayArea = 'category_page_list';
-        $showDescription = true;
-        $templateType = \Magento\Catalog\Block\Product\ReviewRendererInterface::FULL_VIEW;
-    }
-    ?>
-
-    <div class="products wrapper <?= /* @noEscape */ $viewMode ?>">
-        <div class="row">
+    <?php if ($block->getMode() === 'grid'): ?>
+        <!-- GRID VIEW -->
+        <div class="row custom-grid">
             <?php foreach ($_productCollection as $_product): ?>
-                <div class="col-lg-3 col-md-6 col-12">
+                <div class="col-lg-4 col-md-6 col-12">
                     <div class="single-product">
-
-                        <!-- Product Image -->
                         <div class="product-image">
-                            <a href="<?= $escaper->escapeUrl($_product->getProductUrl()) ?>">
-                                <?= $block->getImage($_product, $imageDisplayArea)->toHtml(); ?>
-                            </a>
-
-                            <!-- Sale Tag -->
-                            <?php if ($_product->getFinalPrice() < $_product->getPrice()): ?>
-                                <span class="sale-tag">
-                                    -<?= round((($_product->getPrice() - $_product->getFinalPrice()) / $_product->getPrice()) * 100) ?>%
-                                </span>
-                            <?php endif; ?>
-
-                            <!-- Add to Cart Button -->
+                            <?= $block->getImage($_product, 'category_page_grid')->toHtml(); ?>
                             <div class="button">
                                 <?php if ($_product->isSaleable()): ?>
                                     <?php $postParams = $block->getAddToCartPostParams($_product); ?>
@@ -60,82 +34,90 @@ $_helper = $block->getData('outputHelper');
                                           data-product-sku="<?= $escaper->escapeHtml($_product->getSku()) ?>"
                                           action="<?= $escaper->escapeUrl($postParams['action']) ?>"
                                           method="post">
-                                        <?php $options = $block->getData('viewModel')->getOptionsData($_product); ?>
-                                        <?php foreach ($options as $optionItem): ?>
-                                            <input type="hidden" name="<?= $escaper->escapeHtml($optionItem['name']) ?>"
-                                                   value="<?= $escaper->escapeHtml($optionItem['value']) ?>">
-                                        <?php endforeach; ?>
+                                        <?= $block->getBlockHtml('formkey') ?>
                                         <input type="hidden" name="product"
                                                value="<?= /* @noEscape */ $postParams['data']['product'] ?>">
-                                        <input type="hidden" name="<?= /* @noEscape */ \Magento\Framework\App\Action\Action::PARAM_NAME_URL_ENCODED ?>"
-                                               value="<?= /* @noEscape */ $postParams['data'][\Magento\Framework\App\Action\Action::PARAM_NAME_URL_ENCODED] ?>">
-                                        <?= $block->getBlockHtml('formkey') ?>
-                                        <button type="submit" class="btn action tocart primary">
+                                        <input type="hidden" name="<?= \Magento\Framework\App\ActionInterface::PARAM_NAME_URL_ENCODED ?>"
+                                               value="<?= /* @noEscape */ $postParams['data'][\Magento\Framework\App\ActionInterface::PARAM_NAME_URL_ENCODED] ?>">
+                                        <button type="submit" class="btn">
                                             <i class="lni lni-cart"></i> <?= $escaper->escapeHtml(__('Add to Cart')) ?>
                                         </button>
                                     </form>
-                                <?php else: ?>
-                                    <?php if ($_product->isAvailable()): ?>
-                                        <span class="stock available"><?= $escaper->escapeHtml(__('In stock')) ?></span>
-                                    <?php else: ?>
-                                        <span class="stock unavailable"><?= $escaper->escapeHtml(__('Out of stock')) ?></span>
-                                    <?php endif; ?>
                                 <?php endif; ?>
                             </div>
                         </div>
-
-                        <!-- Product Info -->
                         <div class="product-info">
-                            <!-- Category Name (optional, if needed you must load category names in block) -->
                             <span class="category">
-                                <?= $escaper->escapeHtml($_product->getAttributeText('category_ids') ?: '') ?>
+                                <?= $_helper->productAttribute($_product, $_product->getAttributeText('category_ids'), 'category_ids') ?>
                             </span>
-
                             <h4 class="title">
                                 <a href="<?= $escaper->escapeUrl($_product->getProductUrl()) ?>">
                                     <?= $_helper->productAttribute($_product, $_product->getName(), 'name') ?>
                                 </a>
                             </h4>
-
-                            <!-- Reviews -->
-                            <?= $block->getReviewsSummaryHtml($_product, $templateType) ?>
-
-                            <!-- Price -->
+                            <?= $block->getReviewsSummaryHtml($_product, \Magento\Catalog\Block\Product\ReviewRendererInterface::SHORT_VIEW) ?>
                             <div class="price">
                                 <?= $block->getProductPrice($_product) ?>
                             </div>
-
-                            <!-- Extra Details from Extensions -->
-                            <?= $block->getProductDetailsHtml($_product) ?>
-
-                            <!-- Short Description for List View -->
-                            <?php if ($showDescription): ?>
-                                <div class="product description product-item-description">
-                                    <?= /* @noEscape */ $_helper->productAttribute(
-                                        $_product,
-                                        $_product->getShortDescription(),
-                                        'short_description'
-                                    ) ?>
-                                    <a href="<?= $escaper->escapeUrl($_product->getProductUrl()) ?>"
-                                       class="action more"><?= $escaper->escapeHtml(__('Learn More')) ?></a>
-                                </div>
-                            <?php endif; ?>
                         </div>
-
-                        <!-- Wishlist / Compare -->
-                        <div class="actions-secondary">
-                            <?php if ($addToBlock = $block->getChildBlock('addto')): ?>
-                                <?= $addToBlock->setProduct($_product)->getChildHtml() ?>
-                            <?php endif; ?>
-                        </div>
-
                     </div>
                 </div>
             <?php endforeach; ?>
         </div>
-    </div>
 
-    <!-- Toolbar (bottom) -->
-    <?= $block->getChildBlock('toolbar')->setIsBottom(true)->toHtml() ?>
+    <?php else: ?>
+        <!-- LIST VIEW -->
+        <div class="row custom-list">
+            <?php foreach ($_productCollection as $_product): ?>
+                <div class="col-lg-12 col-md-12 col-12">
+                    <div class="single-product">
+                        <div class="row align-items-center">
+                            <div class="col-lg-4 col-md-4 col-12">
+                                <div class="product-image">
+                                    <?= $block->getImage($_product, 'category_page_list')->toHtml(); ?>
+                                    <div class="button">
+                                        <?php if ($_product->isSaleable()): ?>
+                                            <?php $postParams = $block->getAddToCartPostParams($_product); ?>
+                                            <form data-role="tocart-form"
+                                                  data-product-sku="<?= $escaper->escapeHtml($_product->getSku()) ?>"
+                                                  action="<?= $escaper->escapeUrl($postParams['action']) ?>"
+                                                  method="post">
+                                                <?= $block->getBlockHtml('formkey') ?>
+                                                <input type="hidden" name="product"
+                                                       value="<?= /* @noEscape */ $postParams['data']['product'] ?>">
+                                                <input type="hidden" name="<?= \Magento\Framework\App\ActionInterface::PARAM_NAME_URL_ENCODED ?>"
+                                                       value="<?= /* @noEscape */ $postParams['data'][\Magento\Framework\App\ActionInterface::PARAM_NAME_URL_ENCODED] ?>">
+                                                <button type="submit" class="btn">
+                                                    <i class="lni lni-cart"></i> <?= $escaper->escapeHtml(__('Add to Cart')) ?>
+                                                </button>
+                                            </form>
+                                        <?php endif; ?>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-8 col-md-8 col-12">
+                                <div class="product-info">
+                                    <span class="category">
+                                        <?= $_helper->productAttribute($_product, $_product->getAttributeText('category_ids'), 'category_ids') ?>
+                                    </span>
+                                    <h4 class="title">
+                                        <a href="<?= $escaper->escapeUrl($_product->getProductUrl()) ?>">
+                                            <?= $_helper->productAttribute($_product, $_product->getName(), 'name') ?>
+                                        </a>
+                                    </h4>
+                                    <?= $block->getReviewsSummaryHtml($_product, \Magento\Catalog\Block\Product\ReviewRendererInterface::FULL_VIEW) ?>
+                                    <div class="price">
+                                        <?= $block->getProductPrice($_product) ?>
+                                    </div>
+                                    <p><?= $_helper->productAttribute($_product, $_product->getShortDescription(), 'short_description') ?></p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            <?php endforeach; ?>
+        </div>
+    <?php endif; ?>
 
 <?php endif; ?>
+    <?= $block->getChildBlock('toolbar')->setIsBottom(true)->toHtml() ?>

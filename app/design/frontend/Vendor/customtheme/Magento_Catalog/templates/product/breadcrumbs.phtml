@@ -1,21 +1,18 @@
-<?php
-/**
- * Copyright © Magento, Inc. All rights reserved.
- * See COPYING.txt for license details.
- */
-/** @var \Magento\Theme\Block\Html\Breadcrumbs $block */
-/** @var \Magento\Catalog\ViewModel\Product\Breadcrumbs $viewModel */
-$viewModel = $block->getData('viewModel');
-?>
-<div class="breadcrumbs"></div>
-<?php
-$widget = $this->helper(\Magento\Framework\Json\Helper\Data::class)->jsonDecode($viewModel->getJsonConfigurationHtmlEscaped());
-$widgetOptions = $this->helper(\Magento\Framework\Json\Helper\Data::class)->jsonEncode($widget['breadcrumbs']);
-?>
-<script type="text/x-magento-init">
-    {
-        ".breadcrumbs": {
-            "breadcrumbs": <?= /* @noEscape */ $widgetOptions ?>
-        }
-    }
-</script>
+<div class="custom-breadcrumbs">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-lg-6 col-md-6 col-12">
+                    <!-- <div class="breadcrumbs-content">
+                        <h1 class="page-title">Single Product</h1>
+                    </div> -->
+                </div>
+                <div class="col-lg-6 col-md-6 col-12">
+                    <ul class="breadcrumb-nav">
+                        <li><a href="index.html"><i class="lni lni-home"></i> Home</a></li>
+                        <li><a href="index.html">Shop</a></li>
+                        <li>Single Product</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>

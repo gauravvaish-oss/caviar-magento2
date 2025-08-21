@@ -1,0 +1,29 @@
+<?php /** @var $block \Magento\Catalog\Block\Product\View */ ?>
+<?php
+$product = $block->getProduct();
+$categories = $product->getCategoryCollection()
+    ->addAttributeToSelect('name')
+    ->addAttributeToSelect('url_key')
+    ->addAttributeToSelect('url')
+    ->setOrder('level', 'ASC'); // so parent comes first
+
+$category = $categories->getFirstItem(); // get first category (you can customize this)
+$parentCategory = null;
+
+if ($category && $category->getParentCategory()) {
+    $parentCategory = $category->getParentCategory();
+}
+?>
+<div class="product-info">
+    <h2 class="title"><?= $block->escapeHtml($product->getName()); ?></h2>
+
+    <?php if ($parentCategory && $category): ?>
+        <p class="category">
+            <i class="lni lni-tag"></i>
+            <?= $block->escapeHtml($parentCategory->getName()); ?>:
+            <a href="<?= $block->escapeUrl($category->getUrl()); ?>">
+                <?= $block->escapeHtml($category->getName()); ?>
+            </a>
+        </p>
+    <?php endif; ?>
+</div>
