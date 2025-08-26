@@ -128,6 +128,7 @@ define([
          * @return {*|String}
          */
         getItemRenderer: function (productType) {
+            console.log('productType', productType)
             return this.itemRenderer[productType] || 'defaultRenderer';
         },
 

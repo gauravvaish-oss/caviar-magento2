@@ -13,6 +13,7 @@
         <css src="css/glightbox.min.css"/>
         <css src="css/LineIcons.3.0.css"/>
         <css src="css/main.css"/>
+        <css src="css/styles-l.css"/>
         <css src="css/tiny-slider.css"/>
         <script src="js/bootstrap.min.js"/>
         <script src="js/glightbox.min.js"/>

@@ -1,0 +1,83 @@
+<?php if ($block->canShowBlock()) : ?>
+    <div class="block filter">
+        <div class="block-title filter-title">
+            <strong><?= $block->escapeHtml(__('Shop By')) ?></strong>
+        </div>
+
+        <div class="block-content filter-content">
+            <?= $block->getChildHtml('state') ?>
+
+            <?php if ($block->getLayer()->getState()->getFilters()) : ?>
+                <div class="block-actions filter-actions">
+                    <a href="<?= $block->escapeUrl($block->getClearUrl()) ?>" class="action clear filter-clear">
+                        <span><?= $block->escapeHtml(__('Clear All')) ?></span>
+                    </a>
+                </div>
+            <?php endif; ?>
+
+            <?php $wrapOptions = false; ?>
+            <?php foreach ($block->getFilters() as $filter) : ?>
+                <?php if (!$wrapOptions) : ?>
+                    <strong role="heading" aria-level="2" class="block-subtitle filter-subtitle">
+                        <?= $block->escapeHtml(__('Shopping Options')) ?>
+                    </strong>
+                    <dl class="filter-options" id="narrow-by-list">
+                    <?php $wrapOptions = true; ?>
+                <?php endif; ?>
+
+                <?php if ($filter->getItemsCount()) : ?>
+                    <dt class="filter-options-title collapsible" role="heading" aria-level="3">
+                        <?= $block->escapeHtml(__($filter->getName())) ?>
+                        <span class="toggle-icon">+</span>
+                    </dt>
+                    <dd class="filter-options-content" style="display:none;">
+                        <?= /* @noEscape */ $block->getChildBlock('renderer')->render($filter) ?>
+                    </dd>
+                <?php endif; ?>
+            <?php endforeach; ?>
+
+            <?php if ($wrapOptions) : ?>
+                </dl>
+            <?php endif; ?>
+        </div>
+    </div>
+
+    <style>
+        .filter-options-title {
+            cursor: pointer;
+            position: relative;
+            padding-right: 20px;
+        }
+        .filter-options-title .toggle-icon {
+            position: absolute;
+            right: 0;
+            top: 0;
+            font-weight: 500;
+        }
+        .filter-options-title.active .toggle-icon {
+            content: "-";
+        }
+    </style>
+
+    <script>
+        require(['jquery'], function ($) {
+            $(function () {
+                $('#narrow-by-list').on('click', '.filter-options-title', function () {
+                    var $title = $(this);
+                    var $content = $title.next('.filter-options-content');
+
+                    $content.slideToggle(200);
+                    $title.toggleClass('active');
+
+                    // Update icon
+                    var $icon = $title.find('.toggle-icon');
+                    if ($title.hasClass('active')) {
+                        $icon.text('-');
+                    } else {
+                        $icon.text('+');
+                    }
+                });
+            });
+        });
+    </script>
+<?php endif; ?>

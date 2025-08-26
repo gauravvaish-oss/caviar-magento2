@@ -4889,3 +4889,674 @@ top: 2px;
   }
 }
 
+/* Login block container */
+.block-customer-login {
+    max-width: 500px;
+    margin: 60px auto;
+    padding: 30px;
+    border: 1px solid #e6e6e6;
+    border-radius: 6px;
+    background-color: #fff;
+    box-shadow: 0px 5px 40px rgba(0, 0, 0, 0.08);
+}
+
+/* Title */
+.block-customer-login .block-title {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.block-customer-login .block-title strong {
+    font-size: 22px;
+    font-weight: 600;
+    color: #333;
+}
+
+/* Form fields */
+.block-customer-login .form-login .field {
+    margin-bottom: 18px;
+}
+
+.block-customer-login .form-login .label {
+    display: block;
+    margin-bottom: 6px;
+    font-weight: 500;
+    font-size: 14px;
+    color: #444;
+}
+
+.block-customer-login .form-login .control input {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 15px;
+    transition: border-color 0.2s ease;
+}
+
+.block-customer-login .form-login .control input:focus {
+    border-color: #007bff;
+    outline: none;
+}
+
+/* Actions (buttons + links) */
+.block-customer-login .actions-toolbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 20px;
+}
+
+.block-customer-login .actions-toolbar .primary .action.login {
+    background-color: #007bff;
+    border: none;
+    padding: 12px 26px;
+    border-radius: 4px;
+    font-size: 15px;
+    color: #fff;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+}
+
+.block-customer-login .actions-toolbar .primary .action.login:hover {
+    background-color: #0056b3;
+}
+
+.block-customer-login .actions-toolbar .secondary a {
+    font-size: 14px;
+    color: #007bff;
+    text-decoration: none;
+}
+
+.block-customer-login .actions-toolbar .secondary a:hover {
+    text-decoration: underline;
+}
+/* Wrap both login & new customer blocks side by side */
+.account-login {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 30px;
+    justify-content: center;
+    margin: 60px auto;
+    max-width: 1100px;
+}
+/* --- New Customers Block --- */
+.block-new-customer {
+    max-width: 650px;
+    margin: 60px auto;
+    padding: 30px;
+    border: 1px solid #e6e6e6;
+    border-radius: 6px;
+    background-color: #fff;
+    box-shadow: 0px 5px 40px rgba(0, 0, 0, 0.08);
+    height: 250px;
+}
+
+/* Title */
+.block-new-customer .block-title {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.block-new-customer .block-title strong {
+    font-size: 22px;
+    font-weight: 600;
+    color: #333;
+}
+
+/* Description text */
+.block-new-customer .block-content p {
+    font-size: 15px;
+    line-height: 1.6;
+    color: #555;
+    margin-bottom: 25px;
+}
+
+/* Create Account button */
+.block-new-customer .actions-toolbar {
+    text-align: center;
+}
+
+.block-new-customer .action.create {
+    display: inline-block;
+    padding: 12px 28px;
+    border-radius: 4px;
+    background-color: #1979c3; /* same blue as login */
+    color: #fff;
+    font-size: 15px;
+    font-weight: 500;
+    text-decoration: none;
+    transition: background-color 0.2s ease;
+}
+
+.block-new-customer .action.create:hover {
+    background-color: #145a8c;
+}
+
+.action.create.primary {
+  background-color: #007bff;
+}
+.login-container {
+  display: flex;
+}
+
+.field.note {
+  font-size: 15px;
+  line-height: 1.6;
+  color: #555;
+  text-align: center;
+  margin-bottom: 25px;
+}
+
+
+.block.block-dashboard-info {
+  background-color: #fff;
+  padding: 25px 25px;
+}
+
+.block.block-dashboard-addresses {
+  background-color: #fff;
+  padding: 25px 25px;
+}
+
+.block-dashboard-info > .block-title {
+  font-size: 15px;
+  color: #000;
+}
+.block-dashboard-addresses > .block-title {
+  font-size: 15px;
+  color: #000;
+}
+
+li.nav.item {
+  display: block;
+}
+
+
+
+/* Container styling */
+form.form-edit-account {
+    padding: 40px;
+    border: 1px solid #e6e6e6;
+    border-radius: 4px;
+    background-color: #fff;
+    box-shadow: 0px 5px 40px #00000008;
+    margin: 0 auto;
+}
+
+@media (max-width: 767px) {
+    form.form-edit-account {
+        padding: 30px;
+    }
+}
+
+/* Fieldsets and legends */
+form.form-edit-account .fieldset {
+    margin-bottom: 20px;
+    border: none;
+    padding: 0;
+}
+
+form.form-edit-account .legend {
+    font-size: 22px;
+    font-weight: 700;
+    color: #081828;
+    margin-bottom: 15px;
+    display: block;
+}
+
+/* Form fields */
+form.form-edit-account .field {
+    margin-bottom: 15px;
+}
+
+form.form-edit-account .field label.label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: 500;
+    color: #081828;
+}
+
+/* Input fields */
+form.form-edit-account .field .control .input-text,
+form.form-edit-account .field .control select {
+    padding: 0 18px;
+    border: 1px solid #e0e0e0;
+    background-color: #fff;
+    color: #505050;
+    font-size: 14px;
+    height: 46px;
+    border-radius: 4px !important;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+/* Checkbox fields */
+form.form-edit-account .field.choice .checkbox {
+    margin-right: 8px;
+}
+
+form.form-edit-account .field.choice label.label {
+    display: inline-block;
+    font-weight: 500;
+    color: #081828;
+}
+
+/* Password strength meter */
+form.form-edit-account .password-strength-meter {
+    margin-top: 5px;
+    font-size: 13px;
+    color: #505050;
+}
+
+/* Buttons */
+form.form-edit-account .actions-toolbar .primary .action.save {
+    width: 100%;
+    background-color: #0167F3;
+    border: none;
+    color: #fff;
+    padding: 12px 25px;
+    font-size: 16px;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+form.form-edit-account .actions-toolbar .secondary .action.back {
+    display: block;
+    margin-top: 10px;
+    text-align: center;
+    color: #0167F3;
+    text-decoration: underline;
+}
+
+/* Optional: outer link for additional info */
+form.form-edit-account .outer-link {
+    text-align: center;
+    margin-top: 15px;
+}
+
+form.form-edit-account .outer-link a {
+    color: #0167F3;
+}
+
+form.form-edit-account .outer-link a:hover {
+    text-decoration: underline;
+}
+
+/* Field container for email/password toggles */
+form.form-edit-account [data-container] {
+    margin-top: 10px;
+}
+
+/* Responsive adjustments for tooltips */
+form.form-edit-account .field-tooltip-content {
+    background: #f9f9f9;
+    border: 1px solid #ccc;
+    padding: 10px;
+    font-size: 13px;
+    border-radius: 4px;
+}
+ul.nav.items{
+  display: block;
+}
+
+
+.products-grid.wishlist {
+  background-color: #fff;
+}
+
+/* General form container */
+form.create.account {
+    max-width: 700px;
+    margin: 0 auto;
+    padding: 2rem;
+    background: #fff;
+    border: 1px solid #e5e5e5;
+    border-radius: 8px;
+    box-shadow: 0 3px 8px rgba(0,0,0,0.05);
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+
+/* Fieldsets */
+form.create.account fieldset {
+    margin-bottom: 2rem;
+    padding: 1.5rem;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    background: #f9f9f9;
+}
+
+form.create.account fieldset .legend {
+    font-weight: 600;
+    font-size: 1.1rem;
+    margin-bottom: 1rem;
+    display: block;
+}
+
+/* Labels */
+form.create.account label.label {
+    display: block;
+    font-weight: 500;
+    margin-bottom: 0.5rem;
+}
+
+/* Input fields */
+form.create.account input.input-text,
+form.create.account select {
+    width: 100%;
+    padding: 0.6rem 0.8rem;
+    font-size: 0.95rem;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    transition: border-color 0.3s;
+    box-sizing: border-box;
+}
+
+form.create.account input.input-text:focus,
+form.create.account select:focus {
+    border-color: #3f51b5;
+    outline: none;
+}
+
+/* Checkbox */
+form.create.account .field.choice input[type="checkbox"] {
+    margin-right: 0.5rem;
+}
+
+form.create.account .field.choice label span {
+    font-weight: 400;
+}
+
+/* Buttons */
+.actions-toolbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 2rem;
+    margin-bottom: 2rem;
+
+}
+
+.actions-toolbar .primary .action.submit {
+    background-color: #3f51b5;
+    color: #fff;
+    padding: 0.75rem 1.5rem;
+    font-size: 1rem;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+
+.actions-toolbar .primary .action.submit:hover {
+    background-color: #303f9f;
+}
+
+.actions-toolbar .secondary .action.back {
+    color: #3f51b5;
+    text-decoration: none;
+    font-weight: 500;
+}
+
+.actions-toolbar .secondary .action.back:hover {
+    text-decoration: underline;
+}
+
+/* Password strength */
+#password-strength-meter-container {
+    margin-top: 0.5rem;
+}
+
+.password-strength-meter {
+    font-size: 0.9rem;
+    color: #555;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    form.create.account {
+        padding: 1rem;
+    }
+
+    .actions-toolbar {
+        flex-direction: column;
+        gap: 1rem;
+    }
+
+    .actions-toolbar .primary,
+    .actions-toolbar .secondary {
+        width: 100%;
+    }
+}
+
+
+
+/* ===== Form Address Edit Styling ===== */
+.form-address-edit {
+    max-width: 700px;
+    padding: 25px;
+    background: #fff;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+    font-family: "Segoe UI", Arial, sans-serif;
+}
+
+.form-address-edit fieldset {
+    border: none;
+    margin-bottom: 25px;
+}
+
+.form-address-edit legend {
+    font-size: 1.3rem;
+    font-weight: 600;
+    margin-bottom: 15px;
+    color: #333;
+}
+
+.form-address-edit .field {
+    margin-bottom: 18px;
+}
+
+.form-address-edit .label {
+    display: block;
+    margin-bottom: 6px;
+    font-weight: 500;
+    color: #444;
+}
+
+.form-address-edit .control input,
+.form-address-edit .control select {
+    width: 100%;
+    padding: 10px 14px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    background: #fdfdfd;
+    font-size: 15px;
+    transition: all 0.2s ease-in-out;
+}
+
+.form-address-edit .control input:focus,
+.form-address-edit .control select:focus {
+    border-color: #007bff;
+    outline: none;
+    box-shadow: 0 0 4px rgba(0,123,255,0.4);
+}
+
+.form-address-edit .actions-toolbar {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
+}
+
+.form-address-edit .actions-toolbar .action.save {
+    background: #007bff;
+    color: #fff;
+    padding: 12px 24px;
+    border-radius: 8px;
+    border: none;
+    font-size: 15px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.2s ease-in-out;
+}
+
+.form-address-edit .actions-toolbar .action.save:hover {
+    background: #0056b3;
+}
+
+.form-address-edit .actions-toolbar .action.back {
+    text-decoration: none;
+    font-size: 15px;
+    padding: 12px 20px;
+    border-radius: 8px;
+    background: #f1f1f1;
+    color: #333;
+    transition: background 0.2s ease-in-out;
+}
+
+.form-address-edit .actions-toolbar .action.back:hover {
+    background: #e0e0e0;
+}
+
+
+/* Newsletter Manage Form */
+.form-newsletter-manage {
+    max-width: 450px;
+    padding: 25px;
+    background: #ffffff;
+    box-shadow: 0 6px 20px rgba(0,0,0,0.08);
+    font-family: "Segoe UI", Tahoma, sans-serif;
+}
+
+.form-newsletter-manage fieldset {
+    border: none;
+    margin: 0;
+    padding: 0;
+}
+
+.form-newsletter-manage legend {
+    font-size: 1.3rem;
+    font-weight: 600;
+    color: #333;
+    margin-bottom: 20px;
+    display: block;
+}
+
+.form-newsletter-manage .field.choice {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 25px;
+}
+
+.form-newsletter-manage input[type="checkbox"] {
+    width: 18px;
+    height: 18px;
+    accent-color: #007bff; /* modern checkbox color */
+    cursor: pointer;
+}
+
+.form-newsletter-manage label {
+    font-size: 1rem;
+    color: #444;
+    cursor: pointer;
+}
+
+/* Actions toolbar */
+.form-newsletter-manage .actions-toolbar {
+   display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 0px !important;
+  margin-bottom: 1rem !important;
+  margin-left: 0px !important;
+}
+
+.form-newsletter-manage .action.save {
+    background: #007bff;
+color: #fff;
+  padding: 8px 20px;
+  border-radius: 8px;
+  border: none;
+  cursor: pointer;
+  font-size: 20px;
+  font-weight: 600;
+  transition: 0.3s;
+
+}
+
+.form-newsletter-manage .action.save:hover {
+    background: #0056b3;
+}
+
+.form-newsletter-manage .action.back {
+    display: inline-block;
+    padding: 10px 20px;
+    font-size: 0.9rem;
+    font-weight: 500;
+    color: #555;
+    background: #f5f5f5;
+    border-radius: 8px;
+    transition: 0.3s;
+    text-decoration: none;
+}
+
+.form-newsletter-manage .action.back:hover {
+    background: #e2e2e2;
+    color: #000;
+}
+
+.table-wrapper.orders-history {
+  background-color: #fff;
+  padding: 15px 25px;
+}
+
+.action.view {
+  background: #007bff;
+  color: #fff;
+  padding: 3px 9px;
+  border: none;
+  cursor: pointer;
+  font-size: 12px;
+  font-weight: 600;
+  transition: 0.3s;
+}
+
+.action.order {
+  background: #2c5493;
+  color: #fff;
+  padding: 3px 9px;
+  border: none;
+  cursor: pointer;
+  font-size: 12px;
+  font-weight: 600;
+  transition: 0.3s;
+}
+
+.order-products-toolbar.toolbar.bottom {
+  background: #fff;
+  padding: 15px 20px;
+}
+.block.block-addresses-default {
+  background: #fff;
+  padding: 27px 35px;
+}
+.block-addresses-default .block-title {
+  color: #000;
+}
+
+.box-address-billing .box-title {
+  color: #000;
+}
+
+.box-address-shipping .box-title {
+  color: #000;
+}
+
+.block.block-addresses-list {
+  background: #fff;
+  padding: 27px 35px;
+}
+
+.action.primary.add {
+  background-color: #007bff;
+}
