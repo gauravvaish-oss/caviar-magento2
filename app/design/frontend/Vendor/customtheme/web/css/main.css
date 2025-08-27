@@ -5221,9 +5221,7 @@ form.create.account {
 form.create.account fieldset {
     margin-bottom: 2rem;
     padding: 1.5rem;
-    border: 1px solid #ddd;
     border-radius: 6px;
-    background: #f9f9f9;
 }
 
 form.create.account fieldset .legend {

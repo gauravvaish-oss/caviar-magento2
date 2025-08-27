@@ -143,6 +143,10 @@
                    name="custom.product.details"
                    template="Magento_Catalog::product/view/custom-details.phtml"
                    after="product.info.media"/>
+                   <block class="Magento\Review\Block\Product\View\ListView"
+           name="custom.reviews.wrapper"
+           template="Magento_Review::product/view/custom-wrapper.phtml"
+           after="custom.product.details"/>
             <block class="Magento\Cookie\Block\RequireCookie" name="require-cookie" template="Magento_Cookie::require_cookie.phtml">
                 <arguments>
                     <argument name="triggers" xsi:type="array">
