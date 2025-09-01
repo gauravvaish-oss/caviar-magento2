@@ -30,10 +30,10 @@ return [
         'table_prefix' => '',
         'connection' => [
             'default' => [
-                'host' => 'db',
-                'dbname' => 'magento246',
+                'host' => 'localhost',
+                'dbname' => 'magento2',
                 'username' => 'root',
-                'password' => 'root',
+                'password' => 'admin@123',
                 'model' => 'mysql4',
                 'engine' => 'innodb',
                 'initStatements' => 'SET NAMES utf8;',

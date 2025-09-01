@@ -352,6 +352,7 @@ return [
         'PayPal_Braintree' => 1,
         'PayPal_BraintreeGraphQl' => 1,
         'Temando_ShippingRemover' => 1,
+        'Vendor_CustomMinicart' => 1,
         'Vendor_Theme' => 1,
         'Vendor_TrendingProducts' => 0
     ]

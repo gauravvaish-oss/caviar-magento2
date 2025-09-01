@@ -30,7 +30,7 @@
                         <argument name="additionalSearchFormData" xsi:type="object">Magento\Search\ViewModel\AdditionalSearchFormData</argument>
                     </arguments>
                 </block>
-                <block class="Magento\Checkout\Block\Cart\Sidebar" name="minicart" as="minicart" after="logo" template="Magento_Checkout::cart/minicart.phtml">
+                <block class="Magento\Checkout\Block\Cart\Sidebar" name="minicart" as="minicart" after="logo" template="Vendor_CustomMinicart::cart/minicart.phtml">
                     <arguments>
                         <argument name="jsLayout" xsi:type="array">
                             <item name="types" xsi:type="array"/>
